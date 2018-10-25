@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        legend {
+            background-color: #000;
+            color: #fff;
+            padding: 3px 6px;
+        }
+        
+        .output {
+            font: 1rem 'Fira Sans', sans-serif;
+        }
+        
+        input {
+            margin: .4rem;
+        }
+        
+        label {
+            display: inline-block;
+            text-align: right;
+            width: 20%;
+        }
+        
+        .output2 {
+            font: 1rem 'Fira Sans', sans-serif;
+        }
+        
+        .control {
+            margin: 1rem 0;
+        }
+        
+        label2 {
+            display: inline-block;
+            text-align: right;
+            font-size: .8rem;
+            width: 20%;
+        }
+        
+        .hours {
+            font-size: .7em;
+            color: #999;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+
+    <h2>HTML Forms</h2>
+
+    <form action="/create" method="POST">
+        Hello {{email}}
+
+        <br>
+        Title:<br>
+        <input type="text" name="title" value="">
+        <br>
+        Content:<br>
+        <textarea name="content" cols="40" rows="5"></textarea>
+        <br><br>
+
+        <fieldset>
+            <legend>Choose date</legend>
+
+            <div>
+                <label for="start">Start</label>
+                <input type="date" id="date" name="date"
+                value=""
+                />
+            </div>
+        </fieldset>
+
+        <fieldset>
+
+        <legend>Time details</legend>
+
+        <div class="control">
+            <label2 for="time">Start Time:</label2>
+            <input type="time" id="starttime" name="starttime" required />
+        </div>
+        <div class="control">
+            <label2 for="time">End Time:</label2>
+            <input type="time" id="endtime" name="endtime" required />
+        </div>
+    </fieldset>
+    
+    Interests:<br>
+    <input type="text" name="interests" value="interests">
+
+
+        <input type="submit" value="Submit">
+    </form>
+
+
+</body>
+
+</html>

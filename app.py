@@ -69,9 +69,10 @@ def register():
 
             password = hashlib.md5(request.form['pass'].encode())
             hashed_pass = password.hexdigest()
+            interests = ""
 
             new_user = User(
-                name=request.form['name'], email=request.form['email'], password=hashed_pass)
+                name=request.form['name'], email=request.form['email'], password=hashed_pass, interests=interests)
 
             db.session.add(new_user)
             db.session.commit()
@@ -87,6 +88,31 @@ def register():
         flash(Markup(
             "<p><center>Sorry there has been an error! Please Try Again.</center></p>"))
         return render_template("signup.html")
+
+@app.route('/create', methods=['GET', 'POST'])
+def create_event():
+    
+    if request.method == 'GET':
+        return render_template('create_event.html')
+
+    elif request.method == 'POST':
+        title = request.form['title']
+        date = request.form['date']
+        starttime = request.form['starttime']
+        endtime = request.form['endtime']
+        content = request.form['content']
+        interests = request.form['interests']
+        # cur = database.cursor()
+        
+        result = Event(title=title, date=date, starttime=starttime, endtime=endtime, email=session['email'], content=content, interests=interests)
+        db.session.add(result)
+        db.session.commit()
+
+        
+        # cur.execute("""INSERT INTO events (title,date,starttime,endtime,email,content,interests) VALUES (%s,%s,%s,%s,%s,%s,%s)""",(title, date, starttime, endtime, session['email'], content, interests))
+
+        return render_template('create_event.html', email=session['email'])
+    
 
 
 # -------- Logout ---------------------------------------------------------- #

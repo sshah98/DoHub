@@ -18,7 +18,9 @@ class Event(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String())
-    datetime = db.Column(db.DateTime)
+    date = db.Column(db.DateTime)
+    starttime = db.Column(db.String())
+    endtime = db.Column(db.String())
     email = db.Column(db.String(), db.ForeignKey('users.email'))
     content = db.Column(db.Text)
     interests = db.Column(db.Text)
