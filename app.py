@@ -154,7 +154,7 @@ def events():
     cur.execute(query)
     events = list(cur.fetchall())
 
-    return render_template("events.html",events=events)
+    return render_template("sm.html",events=events)
 
 # -------- Logout ---------------------------------------------------------- #
 @app.route('/logout/')
