@@ -1,0 +1,14 @@
+{% block content %}
+    {% for event in events %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ event[0] }}</a>
+              <small class="text-muted">{{ event[1] }}</small>
+            </div>
+            <h2><a class="article-title" href="#">{{ event[2] }}</a></h2>
+            <p class="article-content">{{ event[3] }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
