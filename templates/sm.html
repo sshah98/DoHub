@@ -146,7 +146,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
             <span class="w3-right w3-opacity">1 min</span>
             <h4>{{ event[2] }}</h4><br>
             <hr class="w3-clear">
-            <p>{{ event[1] }}</p>
+            <p>{{ event[1] }}</p>  <!-- Put a link to the event here-->
               <div class="w3-row-padding" style="margin:0 -16px">
                 <div class="w3-half">
                   <img src="/w3images/lights.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">
@@ -167,11 +167,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     <div class="w3-col m2">
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
-          <p>Upcoming Events:</p>
-          <img src="/w3images/forest.jpg" alt="Forest" style="width:100%;">
-          <p><strong>Holiday</strong></p>
-          <p>Friday 15:00</p>
-          <p><button class="w3-button w3-block w3-theme-l4">Info</button></p>
+          <p><strong>Register for Upcoming Events:</strong></p>
+          <!-- Maybe put something here about actual upcoming events -->
+          <form action="/event_register">
+            <p><input type="submit" class="w3-button w3-block w3-theme-l4" value="Sign in here!" /></p>
+          </form>
         </div>
       </div>
       <br>
