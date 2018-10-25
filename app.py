@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for, render_template, request, session, f
 from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 import os
-from sqlalchemy import exc
+from sqlalchemy import exc, select
 import hashlib
 
 
@@ -19,6 +19,38 @@ database = psycopg2.connect(HEROKU_DB, sslmode='allow')
 db = SQLAlchemy(app)
 from models import *
 
+
+def sendEmails():
+    import smtplib
+    from email.MIMEMultipart import MIMEMultipart
+    from email.MIMEText import MIMEText
+
+    cur = database.cursor()
+    query = "SELECT email FROM USERS"
+    cur.execute(query)
+    emails = list(cur.fetchall())
+
+    #email stuff
+    fromaddr = "lantuundohiomail@gmail.com"
+    msg = MIMEMultipart()
+    msg['Subject'] = "NEW EVENT POSTED"
+    body = "A new event has been posted! Check it out here: "
+    msg.attach(MIMEText(body, 'plain'))
+    text = msg.as_string()
+
+    #start the sever
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+
+    #Next, log in to the server
+    server.login(fromaddr, "Password11!")
+
+    for email in emails:
+        toaddr = email
+        #Send the mail
+        server.sendmail(fromaddr, email, msg)
+
+    server.quit()
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -69,9 +101,10 @@ def register():
 
             password = hashlib.md5(request.form['pass'].encode())
             hashed_pass = password.hexdigest()
+            interests = ""
 
             new_user = User(
-                name=request.form['name'], email=request.form['email'], password=hashed_pass)
+                name=request.form['name'], email=request.form['email'], password=hashed_pass, interests=interests)
 
             db.session.add(new_user)
             db.session.commit()
@@ -87,6 +120,31 @@ def register():
         flash(Markup(
             "<p><center>Sorry there has been an error! Please Try Again.</center></p>"))
         return render_template("signup.html")
+
+@app.route('/create', methods=['GET', 'POST'])
+def create_event():
+    
+    if request.method == 'GET':
+        return render_template('create_event.html')
+
+    elif request.method == 'POST':
+        title = request.form['title']
+        date = request.form['date']
+        starttime = request.form['starttime']
+        endtime = request.form['endtime']
+        content = request.form['content']
+        interests = request.form['interests']
+        # cur = database.cursor()
+        
+        result = Event(title=title, date=date, starttime=starttime, endtime=endtime, email=session['email'], content=content, interests=interests)
+        db.session.add(result)
+        db.session.commit()
+
+        
+        # cur.execute("""INSERT INTO events (title,date,starttime,endtime,email,content,interests) VALUES (%s,%s,%s,%s,%s,%s,%s)""",(title, date, starttime, endtime, session['email'], content, interests))
+
+        return render_template('create_event.html', email=session['email'])
+    
 
 @app.route('/events', methods=['GET', 'POST'])
 def events():

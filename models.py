@@ -8,6 +8,22 @@ class User(db.Model):
     name = db.Column(db.String())
     email = db.Column(db.String(), unique=True)
     password = db.Column(db.String())
+    interests = db.Column(db.Text)
 
     def __repr__(self):
-        return 'Email {}>'.format(self.email)
+        return 'Email {}'.format(self.email)
+        
+class Event(db.Model):
+    __tablename__ = 'events'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String())
+    date = db.Column(db.DateTime)
+    starttime = db.Column(db.String())
+    endtime = db.Column(db.String())
+    email = db.Column(db.String(), db.ForeignKey('users.email'))
+    content = db.Column(db.Text)
+    interests = db.Column(db.Text)
+    
+    def __repr__(self):
+        return 'id {}'.format(self.id)
