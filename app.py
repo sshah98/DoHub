@@ -54,11 +54,16 @@ def sendEmails():
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
-        return render_template('home.html')
+        cur = database.cursor()
+        query = "SELECT * FROM events"
+        cur.execute(query)
+        events = list(cur.fetchall())
+        events.reverse()
+
+    return render_template("home.html",events=events,user=[session['name'],session['email']])
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -144,22 +149,8 @@ def create_event():
 
             print(session['email'])
 
-            return redirect(url_for('events'))
+            return redirect(url_for('home'))
     
-
-@app.route('/events', methods=['GET', 'POST'])
-def events():
-
-    cur = database.cursor()
-    query = "SELECT * FROM events"
-    cur.execute(query)
-    events = list(cur.fetchall())
-    events.reverse()
-
-    # user_name = str(session['name'])
-
-    return render_template("sm.html",events=events,user=[session['name'],session['email']])
-
 # -------- Logout ---------------------------------------------------------- #
 @app.route('/logout/')
 def logout():
