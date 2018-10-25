@@ -4,17 +4,23 @@ import psycopg2
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # database = psycopg2.connect(os.environ['DATABASE_URL'], sslmode='allow')
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql:///scorpio"
 
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres:///scorpio"
+
+database = psycopg2.connect("postgres:///scorpio", sslmode='allow')
+# database = psycopg2.connect
 
 db = SQLAlchemy(app)
+from models import *
 
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+	print(database)
+	return "{}".format("Hello World")
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
