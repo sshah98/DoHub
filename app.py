@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for, render_template, request, session, f
 from flask_sqlalchemy import SQLAlchemy
 import psycopg2
 import os
-from sqlalchemy import exc
+from sqlalchemy import exc, select
 import hashlib
 
 
@@ -19,6 +19,38 @@ database = psycopg2.connect(HEROKU_DB, sslmode='allow')
 db = SQLAlchemy(app)
 from models import *
 
+
+def sendEmails():
+    import smtplib
+    from email.MIMEMultipart import MIMEMultipart
+    from email.MIMEText import MIMEText
+
+    cur = database.cursor()
+    query = "SELECT email FROM USERS"
+    cur.execute(query)
+    emails = list(cur.fetchall())
+
+    #email stuff
+    fromaddr = "lantuundohiomail@gmail.com"
+    msg = MIMEMultipart()
+    msg['Subject'] = "NEW EVENT POSTED"
+    body = "A new event has been posted! Check it out here: "
+    msg.attach(MIMEText(body, 'plain'))
+    text = msg.as_string()
+
+    #start the sever
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+
+    #Next, log in to the server
+    server.login(fromaddr, "Password11!")
+
+    for email in emails:
+        toaddr = email
+        #Send the mail
+        server.sendmail(fromaddr, email, msg)
+
+    server.quit()
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
