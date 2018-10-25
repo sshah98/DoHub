@@ -120,6 +120,15 @@ def register():
             "<p><center>Sorry there has been an error! Please Try Again.</center></p>"))
         return render_template("signup.html")
 
+@app.route('/events', methods=['GET', 'POST'])
+def events():
+
+    cur = database.cursor()
+    query = "SELECT * FROM users"
+    cur.execute(query)
+    events = list(cur.fetchall())
+
+    return render_template("events.html",events=events)
 
 # -------- Logout ---------------------------------------------------------- #
 @app.route('/logout/')
