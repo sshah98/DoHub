@@ -123,27 +123,28 @@ def register():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create_event():
-    
-    if request.method == 'GET':
-        return render_template('create_event.html')
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        if request.method == 'GET':
+            return render_template('create_event.html', email=session['email'])
 
-    elif request.method == 'POST':
-        title = request.form['title']
-        date = request.form['date']
-        starttime = request.form['starttime']
-        endtime = request.form['endtime']
-        content = request.form['content']
-        interests = request.form['interests']
-        # cur = database.cursor()
-        
-        result = Event(title=title, date=date, starttime=starttime, endtime=endtime, email=session['email'], content=content, interests=interests)
-        db.session.add(result)
-        db.session.commit()
+        elif request.method == 'POST':
+            title = request.form['title']
+            date = request.form['date']
+            starttime = request.form['starttime']
+            endtime = request.form['endtime']
+            content = request.form['content']
+            interests = request.form['interests']
+            # cur = database.cursor()
+            
+            result = Event(title=title, date=date, starttime=starttime, endtime=endtime, email=session['email'], content=content, interests=interests)
+            db.session.add(result)
+            db.session.commit()
 
-        
-        # cur.execute("""INSERT INTO events (title,date,starttime,endtime,email,content,interests) VALUES (%s,%s,%s,%s,%s,%s,%s)""",(title, date, starttime, endtime, session['email'], content, interests))
+            print(session['email'])
 
-        return render_template('create_event.html', email=session['email'])
+            return redirect(url_for('events'))
     
 
 @app.route('/events', methods=['GET', 'POST'])
