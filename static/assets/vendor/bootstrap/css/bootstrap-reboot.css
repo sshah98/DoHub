@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*!
  * Bootstrap Reboot v4.0.0-beta.2 (https://getbootstrap.com)
  * Copyright 2011-2017 The Bootstrap Authors
@@ -12,6 +13,10 @@
 }
 
 html {
+=======
+html {
+  box-sizing: border-box;
+>>>>>>> heroku-login-setup
   font-family: sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
@@ -20,6 +25,15 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
+<<<<<<< HEAD
+=======
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+>>>>>>> heroku-login-setup
 @-ms-viewport {
   width: device-width;
 }
@@ -30,12 +44,20 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 
 body {
   margin: 0;
+<<<<<<< HEAD
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
   text-align: left;
+=======
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #212529;
+>>>>>>> heroku-login-setup
   background-color: #fff;
 }
 
@@ -51,7 +73,11 @@ hr {
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
+<<<<<<< HEAD
   margin-bottom: 0.5rem;
+=======
+  margin-bottom: .5rem;
+>>>>>>> heroku-login-setup
 }
 
 p {
@@ -89,7 +115,11 @@ ul ol {
 }
 
 dt {
+<<<<<<< HEAD
   font-weight: 700;
+=======
+  font-weight: bold;
+>>>>>>> heroku-login-setup
 }
 
 dd {
@@ -168,7 +198,10 @@ pre {
   margin-top: 0;
   margin-bottom: 1rem;
   overflow: auto;
+<<<<<<< HEAD
   -ms-overflow-style: scrollbar;
+=======
+>>>>>>> heroku-login-setup
 }
 
 figure {
@@ -188,7 +221,11 @@ a,
 area,
 button,
 [role="button"],
+<<<<<<< HEAD
 input:not([type="range"]),
+=======
+input,
+>>>>>>> heroku-login-setup
 label,
 select,
 summary,
@@ -210,7 +247,11 @@ caption {
 }
 
 th {
+<<<<<<< HEAD
   text-align: inherit;
+=======
+  text-align: left;
+>>>>>>> heroku-login-setup
 }
 
 label {
@@ -218,10 +259,13 @@ label {
   margin-bottom: .5rem;
 }
 
+<<<<<<< HEAD
 button {
   border-radius: 0;
 }
 
+=======
+>>>>>>> heroku-login-setup
 button:focus {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;

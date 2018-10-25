@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 /*!
  * Bootstrap Grid v4.0.0-beta.2 (https://getbootstrap.com)
  * Copyright 2011-2017 The Bootstrap Authors
  * Copyright 2011-2017 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+=======
+>>>>>>> heroku-login-setup
 @-ms-viewport {
   width: device-width;
 }
@@ -20,11 +23,19 @@ html {
 }
 
 .container {
+<<<<<<< HEAD
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+=======
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+>>>>>>> heroku-login-setup
 }
 
 @media (min-width: 576px) {
@@ -53,10 +64,18 @@ html {
 
 .container-fluid {
   width: 100%;
+<<<<<<< HEAD
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+=======
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+>>>>>>> heroku-login-setup
 }
 
 .row {
@@ -179,11 +198,14 @@ html {
   max-width: 100%;
 }
 
+<<<<<<< HEAD
 .order-first {
   -ms-flex-order: -1;
       order: -1;
 }
 
+=======
+>>>>>>> heroku-login-setup
 .order-1 {
   -ms-flex-order: 1;
       order: 1;
@@ -244,6 +266,7 @@ html {
       order: 12;
 }
 
+<<<<<<< HEAD
 .offset-1 {
   margin-left: 8.333333%;
 }
@@ -288,6 +311,8 @@ html {
   margin-left: 91.666667%;
 }
 
+=======
+>>>>>>> heroku-login-setup
 @media (min-width: 576px) {
   .col-sm {
     -ms-flex-preferred-size: 0;
@@ -362,10 +387,13 @@ html {
         flex: 0 0 100%;
     max-width: 100%;
   }
+<<<<<<< HEAD
   .order-sm-first {
     -ms-flex-order: -1;
         order: -1;
   }
+=======
+>>>>>>> heroku-login-setup
   .order-sm-1 {
     -ms-flex-order: 1;
         order: 1;
@@ -414,6 +442,7 @@ html {
     -ms-flex-order: 12;
         order: 12;
   }
+<<<<<<< HEAD
   .offset-sm-0 {
     margin-left: 0;
   }
@@ -450,6 +479,8 @@ html {
   .offset-sm-11 {
     margin-left: 91.666667%;
   }
+=======
+>>>>>>> heroku-login-setup
 }
 
 @media (min-width: 768px) {
@@ -526,10 +557,13 @@ html {
         flex: 0 0 100%;
     max-width: 100%;
   }
+<<<<<<< HEAD
   .order-md-first {
     -ms-flex-order: -1;
         order: -1;
   }
+=======
+>>>>>>> heroku-login-setup
   .order-md-1 {
     -ms-flex-order: 1;
         order: 1;
@@ -578,6 +612,7 @@ html {
     -ms-flex-order: 12;
         order: 12;
   }
+<<<<<<< HEAD
   .offset-md-0 {
     margin-left: 0;
   }
@@ -614,6 +649,8 @@ html {
   .offset-md-11 {
     margin-left: 91.666667%;
   }
+=======
+>>>>>>> heroku-login-setup
 }
 
 @media (min-width: 992px) {
@@ -690,10 +727,13 @@ html {
         flex: 0 0 100%;
     max-width: 100%;
   }
+<<<<<<< HEAD
   .order-lg-first {
     -ms-flex-order: -1;
         order: -1;
   }
+=======
+>>>>>>> heroku-login-setup
   .order-lg-1 {
     -ms-flex-order: 1;
         order: 1;
@@ -742,6 +782,7 @@ html {
     -ms-flex-order: 12;
         order: 12;
   }
+<<<<<<< HEAD
   .offset-lg-0 {
     margin-left: 0;
   }
@@ -778,6 +819,8 @@ html {
   .offset-lg-11 {
     margin-left: 91.666667%;
   }
+=======
+>>>>>>> heroku-login-setup
 }
 
 @media (min-width: 1200px) {
@@ -854,10 +897,13 @@ html {
         flex: 0 0 100%;
     max-width: 100%;
   }
+<<<<<<< HEAD
   .order-xl-first {
     -ms-flex-order: -1;
         order: -1;
   }
+=======
+>>>>>>> heroku-login-setup
   .order-xl-1 {
     -ms-flex-order: 1;
         order: 1;
@@ -906,6 +952,7 @@ html {
     -ms-flex-order: 12;
         order: 12;
   }
+<<<<<<< HEAD
   .offset-xl-0 {
     margin-left: 0;
   }
@@ -942,6 +989,8 @@ html {
   .offset-xl-11 {
     margin-left: 91.666667%;
   }
+=======
+>>>>>>> heroku-login-setup
 }
 
 .flex-row {
