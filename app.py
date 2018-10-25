@@ -54,11 +54,16 @@ def sendEmails():
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
-        return render_template('home.html')
+        cur = database.cursor()
+        query = "SELECT * FROM events"
+        cur.execute(query)
+        events = list(cur.fetchall())
+        events.reverse()
+
+    return render_template("home.html",events=events,user=[session['name'],session['email']])
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -123,42 +128,29 @@ def register():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create_event():
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        if request.method == 'GET':
+            return render_template('create_event.html', email=session['email'])
 
-    if request.method == 'GET':
-        return render_template('create_event.html')
+        elif request.method == 'POST':
+            title = request.form['title']
+            date = request.form['date']
+            starttime = request.form['starttime']
+            endtime = request.form['endtime']
+            content = request.form['content']
+            interests = request.form['interests']
+            # cur = database.cursor()
+            
+            result = Event(title=title, date=date, starttime=starttime, endtime=endtime, email=session['email'], content=content, interests=interests)
+            db.session.add(result)
+            db.session.commit()
 
-    elif request.method == 'POST':
-        title = request.form['title']
-        date = request.form['date']
-        starttime = request.form['starttime']
-        endtime = request.form['endtime']
-        content = request.form['content']
-        interests = request.form['interests']
-        # cur = database.cursor()
+            print(session['email'])
 
-        result = Event(title=title, date=date, starttime=starttime, endtime=endtime, email=session['email'], content=content, interests=interests)
-        db.session.add(result)
-        db.session.commit()
-
-
-        # cur.execute("""INSERT INTO events (title,date,starttime,endtime,email,content,interests) VALUES (%s,%s,%s,%s,%s,%s,%s)""",(title, date, starttime, endtime, session['email'], content, interests))
-
-        return render_template('create_event.html', email=session['email'])
-
-
-@app.route('/events', methods=['GET', 'POST'])
-def events():
-
-    cur = database.cursor()
-    query = "SELECT * FROM events"
-    cur.execute(query)
-    events = list(cur.fetchall())
-    events.reverse()
-
-    # user_name = str(session['name'])
-
-    return render_template("sm.html",events=events,user=[session['name'],session['email']])
-
+            return redirect(url_for('home'))
+    
 # -------- Logout ---------------------------------------------------------- #
 @app.route('/logout/')
 def logout():
