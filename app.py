@@ -97,5 +97,9 @@ def logout():
     flash(Markup("<p><center>You have logged out. Thank you!</center></p>"))
     return redirect(url_for('home'))
 
+@app.route('/calendar')
+def calendar():
+    return render_template('json.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
