@@ -123,7 +123,7 @@ def register():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create_event():
-    
+
     if request.method == 'GET':
         return render_template('create_event.html')
 
@@ -135,26 +135,29 @@ def create_event():
         content = request.form['content']
         interests = request.form['interests']
         # cur = database.cursor()
-        
+
         result = Event(title=title, date=date, starttime=starttime, endtime=endtime, email=session['email'], content=content, interests=interests)
         db.session.add(result)
         db.session.commit()
 
-        
+
         # cur.execute("""INSERT INTO events (title,date,starttime,endtime,email,content,interests) VALUES (%s,%s,%s,%s,%s,%s,%s)""",(title, date, starttime, endtime, session['email'], content, interests))
 
         return render_template('create_event.html', email=session['email'])
-    
+
 
 @app.route('/events', methods=['GET', 'POST'])
 def events():
 
     cur = database.cursor()
-    query = "SELECT * FROM users"
+    query = "SELECT * FROM events"
     cur.execute(query)
     events = list(cur.fetchall())
+    events.reverse()
 
-    return render_template("sm.html",events=events)
+    # user_name = str(session['name'])
+
+    return render_template("sm.html",events=events,user=[session['name'],session['email']])
 
 # -------- Logout ---------------------------------------------------------- #
 @app.route('/logout/')
