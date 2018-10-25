@@ -151,11 +151,14 @@ def create_event():
 def events():
 
     cur = database.cursor()
-    query = "SELECT * FROM users"
+    query = "SELECT * FROM events"
     cur.execute(query)
     events = list(cur.fetchall())
+    events.reverse()
 
-    return render_template("sm.html",events=events)
+    # user_name = str(session['name'])
+
+    return render_template("sm.html",events=events,user=[session['name'],session['email']])
 
 # -------- Logout ---------------------------------------------------------- #
 @app.route('/logout/')
@@ -168,6 +171,16 @@ def logout():
 @app.route('/calendar')
 def calendar():
     return render_template('json.html')
+
+@app.route('/event_register')
+def event_register():
+
+    cur = database.cursor()
+    query = "SELECT * FROM events"
+    cur.execute(query)
+    events = list(cur.fetchall())
+
+    return render_template('event_register.html', events=events)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,18 @@
+<html>
+  <!-- Middle Column -->
+  <div class="w3-col m7">
+    <h1>List of events to register for: </h1>
+    {% block content %}
+      {% for event in events %}
+        <p></p>
+        <div class="w3-container w3-card w3-white w3-round w3-margin">
+          <h4>{{ event[2] }}</h4>
+          <p>{{ event[1] }}</p>  <!-- Put a link to the event here-->
+          <br>
+        </div>
+      {% endfor %}
+    {% endblock content %}
+
+  <!-- End Middle Column -->
+  </div>
+</html>
