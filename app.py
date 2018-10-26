@@ -12,9 +12,9 @@ LOCAL_DB = "postgres:///scorpio"
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = LOCAL_DB
+app.config['SQLALCHEMY_DATABASE_URI'] = HEROKU_DB
 app.secret_key = "random-key"
-database = psycopg2.connect(LOCAL_DB, sslmode='allow')
+database = psycopg2.connect(HEROKU_DB, sslmode='allow')
 db = SQLAlchemy(app)
 from models import *
 
