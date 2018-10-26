@@ -4,141 +4,87 @@
 	<title>Event Creation</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="../static/assets2/images/icons/favicon.ico"/>
-	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/static/assets/images/lantuun-dohio-ico.ico" />
 	<link rel="stylesheet" type="text/css" href="../static/assets2/vendor/bootstrap/css/bootstrap.min.css">
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/assets2/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/assets2/fonts/iconic/css/material-design-iconic-font.min.css">
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/assets2/vendor/animate/animate.css">
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/assets2/vendor/css-hamburgers/hamburgers.min.css">
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/assets2/vendor/animsition/css/animsition.min.css">
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/assets2/vendor/select2/select2.min.css">
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/assets2/vendor/daterangepicker/daterangepicker.css">
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/assets2/vendor/noui/nouislider.min.css">
-	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/assets2/css/util.css">
 	<link rel="stylesheet" type="text/css" href="../static/assets2/css/main.css">
-	<!--===============================================================================================-->
-	<style>
-	legend {
-		background-color: #000;
-		color: #fff;
-		padding: 3px 6px;
-	}
-	
-	.output {
-		font: 1rem 'Fira Sans', sans-serif;
-	}
-	
-	input {
-		margin: .4rem;
-	}
-	
-	label {
-		display: inline-block;
-		text-align: right;
-		width: 20%;
-	}
-	
-	.output2 {
-		font: 1rem 'Fira Sans', sans-serif;
-	}
-	
-	.control {
-		margin: 1rem 0;
-	}
-	
-	label2 {
-		display: inline-block;
-		text-align: right;
-		font-size: .8rem;
-		width: 20%;
-	}
-	
-	.hours {
-		font-size: .7em;
-		color: #999;
-	}
-	
-	
-	</style>
+	<link rel="stylesheet" type="text/css" href="../static/assets2/css/time.css">
 </head>
 <body>
 	
 	<form action="/create" method="POST">
-
-	<div class="container-contact100">
-		<div class="wrap-contact100">
-			<form class="contact100-form validate-form">
-				<span class="contact100-form-title">
-					Create an Event
-				</span>
-				<div class="wrap-input100 validate-input bg1">
-					<span class="label-input100">Email *</span>
-					<br>
-					{{ email }}
-				</div>
-				<div class="wrap-input100 validate-input bg1">
-					<span class="label-input100">TITLE *</span>
-					<input class="input100" type="text" name="title" placeholder="Enter Post Title" required>
-				</div>
-				
-				<div class="wrap-input100 bg1">
-					<span class="label-input100">Interests</span>
-					<input class="input100" type="text" name="interests" placeholder="Enter Interests" required>
-				</div>
-				
-				<fieldset>
-					<legend>Choose date</legend>
-
-					<div>
-						<label for="start">Start</label>
-						<input type="date" id="date" name="date" value="" required/>
+		
+		<div class="container-contact100">
+			<div class="wrap-contact100">
+				<form class="contact100-form validate-form">
+					<span class="contact100-form-title">
+						Create an Event
+					</span>
+					<div class="wrap-input100 bg1">
+						<span class="label-input100">Email</span>
+						<br>
+						{{ email }}
 					</div>
-				</fieldset>
-								
-				<fieldset>
+					<div class="wrap-input100 bg1">
+						<span class="label-input100">TITLE *</span>
+						<input class="input100" type="text" name="title" placeholder="Post Title..." required>
+					</div>
 					
-					<legend>Time details</legend>
+					<div class="wrap-input100 bg1">
+						<span class="label-input100">INTERESTS *</span>
+						<input class="input100" type="text" name="interests" placeholder="Interest Tags..." required>
+					</div>
 					
-					<div class="control">
-						<label2 for="time">Start Time:</label2>
-						<input type="time" id="starttime" name="starttime" required />
+					<fieldset>
+						<legend>Choose date</legend>
+						
+						<div>
+							<label for="start">Start</label>
+							<input type="date" id="date" name="date" value="" required/>
+						</div>
+					</fieldset>
+					
+					<fieldset>
+						
+						<legend>Time details</legend>
+						
+						<div class="control">
+							<label2 for="time">Start Time:</label2>
+							<input type="time" id="starttime" name="starttime" required />
+						</div>
+						<div class="control">
+							<label2 for="time">End Time:</label2>
+							<input type="time" id="endtime" name="endtime" required />
+						</div>
+					</fieldset>
+					
+					
+					<div class="wrap-input100 bg0">
+						<span class="label-input100">CONTENT *</span>
+						<textarea class="input100" name="content" placeholder="Event details..." required></textarea>
 					</div>
-					<div class="control">
-						<label2 for="time">End Time:</label2>
-						<input type="time" id="endtime" name="endtime" required />
+					
+					<div class="container-contact100-form-btn">
+						<button class="contact100-form-btn">
+							<span>
+								Submit
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span>
+						</button>
 					</div>
-				</fieldset>
-				
-				
-				<div class="wrap-input100 validate-input bg0 rs1-alert-validate">
-					<span class="label-input100">Content</span>
-					<textarea class="input100" name="content" placeholder="Event details..." required></textarea>
-				</div>
-				
-				<div class="container-contact100-form-btn">
-					<button class="contact100-form-btn">
-						<span>
-							Submit
-							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-						</span>
-					</button>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
-	</div>
-	
-</form>
+		
+	</form>
 	
 	
 	<!--===============================================================================================-->

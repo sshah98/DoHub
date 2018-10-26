@@ -1,0 +1,39 @@
+legend {
+    background-color: #000;
+    color: #fff;
+    padding: 3px 6px;
+}
+
+.output {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
+
+label {
+    display: inline-block;
+    text-align: right;
+    width: 20%;
+}
+
+.output2 {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+.control {
+    margin: 1rem 0;
+}
+
+label2 {
+    display: inline-block;
+    text-align: right;
+    font-size: .8rem;
+    width: 20%;
+}
+
+.hours {
+    font-size: .7em;
+    color: #999;
+}

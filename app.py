@@ -1,11 +1,10 @@
-from flask import Flask, redirect, url_for, render_template, request, session, flash, Markup
-from flask_sqlalchemy import SQLAlchemy
+import hashlib
 import psycopg2
 import os
+
+from flask import Flask, redirect, url_for, render_template, request, session, flash, Markup
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc, select
-import hashlib
-
-
 
 HEROKU_DB = "postgres://utjukngdvaagnt:9e3ad063a636e4cc1ed33e0cdca2ba858daf3040ee4df5e4ed21132f4c2c82f9@ec2-50-17-194-186.compute-1.amazonaws.com:5432/d47t7c5tma2rd5"
 
@@ -13,12 +12,13 @@ LOCAL_DB = "postgres:///scorpio"
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = HEROKU_DB
+app.config['SQLALCHEMY_DATABASE_URI'] = LOCAL_DB
 app.secret_key = "random-key"
-database = psycopg2.connect(HEROKU_DB, sslmode='allow')
+database = psycopg2.connect(LOCAL_DB, sslmode='allow')
 db = SQLAlchemy(app)
 from models import *
 
+# ======== Email Functionality =========================================================== #
 
 def sendEmails():
     import smtplib
@@ -30,7 +30,7 @@ def sendEmails():
     cur.execute(query)
     emails = list(cur.fetchall())
 
-    #email stuff
+    # email stuff
     fromaddr = "lantuundohiomail@gmail.com"
     msg = MIMEMultipart()
     msg['Subject'] = "NEW EVENT POSTED"
@@ -52,18 +52,26 @@ def sendEmails():
 
     server.quit()
 
+# ======== Routing =========================================================== #
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
         cur = database.cursor()
-        query = "SELECT * FROM events"
-        cur.execute(query)
+        events_query = "SELECT * FROM events"
+        cur.execute(events_query)
         events = list(cur.fetchall())
         events.reverse()
 
-    return render_template("home.html",events=events,user=[session['name'],session['email']])
+        user_query = "SELECT name, interests FROM users WHERE email='%s'"  %(session['email']) 
+        cur.execute(user_query)
+        user_info = list(cur.fetchall())
+        name = user_info[0][0]
+        interests = user_info[0][1]
+
+    return render_template("home.html", events=events, user=[name,session['email']], interests=interests)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -84,7 +92,6 @@ def login():
                 session['logged_in'] = True
                 session['email'] = request.form['email']
                 session['pass'] = request.form['pass']
-                session['name'] = session['email'].split("@")[0]
 
                 return redirect(url_for('home'))
             else:
@@ -123,7 +130,7 @@ def register():
 
     except exc.IntegrityError:
         flash(Markup(
-            "<p><center>Sorry there has been an error! Please Try Again.</center></p>"))
+            "<p><center>You already have an account! Please log in below!</center></p>"))
         return render_template("signup.html")
 
 @app.route('/create', methods=['GET', 'POST'])
@@ -150,15 +157,7 @@ def create_event():
             print(session['email'])
 
             return redirect(url_for('home'))
-    
-# -------- Logout ---------------------------------------------------------- #
-@app.route('/logout/')
-def logout():
-    # logout form
-    session['logged_in'] = False
-    flash(Markup("<p><center>You have logged out. Thank you!</center></p>"))
-    return redirect(url_for('home'))
-
+ 
 @app.route('/calendar')
 def calendar():
     return render_template('json.html')
@@ -172,6 +171,14 @@ def event_register():
     events = list(cur.fetchall())
 
     return render_template('event_register.html', events=events)
+
+# ======== Logout =========================================================== #
+@app.route('/logout/')
+def logout():
+    # logout form
+    session['logged_in'] = False
+    flash(Markup("<p><center>You have logged out. Thank you!</center></p>"))
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True)
