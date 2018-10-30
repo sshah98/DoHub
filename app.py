@@ -59,6 +59,7 @@ def home():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
+<<<<<<< HEAD
         cur = database.cursor()
         events_query = "SELECT * FROM events"
         cur.execute(events_query)
@@ -72,6 +73,27 @@ def home():
         interests = user_info[0][1]
 
     return render_template("home.html", events=events, user=[name,session['email']], interests=interests)
+=======
+        try:
+
+            cur = database.cursor()
+            events_query = "SELECT * FROM events"
+            cur.execute(events_query)
+            events = list(cur.fetchall())
+            events.reverse()
+
+            user_query = "SELECT name, interests FROM users WHERE email='%s'"  %(session['email']) 
+            cur.execute(user_query)
+            user_info = list(cur.fetchall())
+            name = user_info[0][0]
+            interests = user_info[0][1]
+
+            return render_template("home.html", events=events, user=[name,session['email']], interests=interests)
+
+        except IndexError:
+            return render_template('login.html')
+
+>>>>>>> 82c14315401711ec18c39145d9dcf99a09cc24d2
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
