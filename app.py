@@ -65,7 +65,7 @@ def home():
         events = list(cur.fetchall())
         events.reverse()
 
-        user_query = "SELECT name, interests FROM users WHERE email='%s'"  %(session['email']) 
+        user_query = "SELECT name, interests FROM users WHERE email='%s'"  %(session['email'])
         cur.execute(user_query)
         user_info = list(cur.fetchall())
         name = user_info[0][0]
@@ -113,10 +113,13 @@ def register():
 
             password = hashlib.md5(request.form['pass'].encode())
             hashed_pass = password.hexdigest()
-            interests = ""
+            interests = request.form['interests']
 
             new_user = User(
-                name=request.form['name'], email=request.form['email'], password=hashed_pass, interests=interests)
+                name=request.form['name'], email=request.form['email'], password=hashed_pass,
+                interests=interests, birthday=request.form['dob'], nationalid=request.form['nationalid'],
+                address=request.form['address'], phone=request.form['phone'], facebook=request.form['fbname'],
+                work_school=request.form['work_school']) #, language=request.form[''], lang_prof=request.form[''])
 
             db.session.add(new_user)
             db.session.commit()
@@ -149,7 +152,7 @@ def create_event():
             content = request.form['content']
             interests = request.form['interests']
             # cur = database.cursor()
-            
+
             result = Event(title=title, date=date, starttime=starttime, endtime=endtime, email=session['email'], content=content, interests=interests)
             db.session.add(result)
             db.session.commit()
@@ -157,7 +160,7 @@ def create_event():
             print(session['email'])
 
             return redirect(url_for('home'))
- 
+
 @app.route('/calendar')
 def calendar():
     return render_template('json.html')
