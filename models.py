@@ -27,3 +27,13 @@ class Event(db.Model):
     
     def __repr__(self):
         return 'id {}'.format(self.id)
+        
+class Amber(db.Model):
+    __tablename__ = 'amber'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String())
+    age = db.Column(db.Integer)
+    description = db.Column(db.Text)
+    seen = db.Column(db.Text)    
+    date = db.Column(db.DateTime)
