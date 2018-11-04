@@ -123,9 +123,9 @@ def register():
 
             new_user = User(
                 name=request.form['name'], email=request.form['email'], password=hashed_pass,
-                interests=interests, birthday=request.form['dob'], nationalid=request.form['nationalid'],
-                address=request.form['address'], phone=request.form['phone'], facebook=request.form['fbname'],
-                work_school=request.form['work_school']) #, language=request.form[''], lang_prof=request.form[''])
+                interests=interests)#, birthday=request.form['dob'], nationalid=request.form['nationalid'],
+                # address=request.form['address'], phone=request.form['phone'], facebook=request.form['fbname'],
+                # work_school=request.form['work_school']) #, language=request.form[''], lang_prof=request.form[''])
 
             db.session.add(new_user)
             db.session.commit()
