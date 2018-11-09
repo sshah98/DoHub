@@ -1,6 +1,7 @@
 import hashlib
 import psycopg2
 import os
+from datetime import datetime, timedelta
 
 from flask import Flask, redirect, url_for, render_template, request, session, flash, Markup
 from flask_sqlalchemy import SQLAlchemy
@@ -150,27 +151,49 @@ def create_event():
             return render_template('create_event.html', email=session['email'])
 
         elif request.method == 'POST':
-            
+
             title = request.form['title']
             date = request.form['date']
             starttime = request.form['starttime']
             endtime = request.form['endtime']
             content = request.form['content']
             interests = request.form['interests']
+            shift_length = request.form['shift_length']
+
+            print(type(starttime))
+            print(type(endtime))
+
+            shifts = []
+            temp_start = datetime.strptime(starttime, '%H:%M')
+            temp_end = datetime.strptime(endtime, '%H:%M')
+
+            #add the first hour
+            if(shift_length == 'hour'):
+                shifts.append(temp_start)
+
+                while(temp_start < temp_end):
+                    temp_start += timedelta(minutes=60)
+                    shifts.append(temp_start)
+            elif(shift_length == 'thirty'):
+                shifts.append(temp_start)
+
+                while(temp_start < temp_end):
+                    temp_start += timedelta(minutes=30)
+                    shifts.append(temp_start)
+            else:
+                shifts.append(temp_start)
+
+            eventid = 1
+            for i in range(0, len(shifts)-1):
+                result = Shifts(eventid=eventid, email=session['email'], shift_start=shifts[i], shift_end=shifts[i+1], spots_open=10, spots_filled=0)
+                db.session.add(result)
+                db.session.commit()
 
             result = Event(title=title, date=date, starttime=starttime, endtime=endtime, email=session['email'], content=content, interests=interests)
             db.session.add(result)
             db.session.commit()
 
             return redirect(url_for('home'))
-
-@app.route('/create_shifts')
-def create_shifts():
-    if not session.get('logged_in'):
-        return render_template('login.html')
-    else:
-        if request.method == 'GET':
-            return render_template('shifts.html')
 
 @app.route('/calendar')
 def calendar():
