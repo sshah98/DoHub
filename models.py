@@ -15,8 +15,9 @@ class User(db.Model):
     phone = db.Column(db.String())
     facebook = db.Column(db.String())
     work_school = db.Column(db.Text)
-    language = db.Column(db.String())
-    lang_prof = db.Column(db.String())
+    english = db.Column(db.String())
+    russian = db.Column(db.String())
+    korean = db.Column(db.String())
     emergency_contact = db.Column(db.Text)
     comments = db.Column(db.Text)
 
