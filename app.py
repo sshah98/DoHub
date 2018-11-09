@@ -125,7 +125,7 @@ def register():
                 name=request.form['name'], email=request.form['email'], password=hashed_pass,
                 interests=interests, birthday=request.form['dob'], nationalid=request.form['nationalid'],
                 address=request.form['address'], phone=request.form['phone'], facebook=request.form['fbname'],
-                work_school=request.form['work_school'], language=request.form[''], lang_prof=request.form[''])
+                work_school=request.form['work_school'], english=request.form['english'], russian=request.form['russian'], korean=request.form['korean'])
 
             db.session.add(new_user)
             db.session.commit()
