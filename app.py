@@ -174,6 +174,7 @@ def calendar():
 @app.route('/event_register', methods=['GET','POST'])
 def event_register():
 
+    ## select where event id after post
     if request.method == 'GET':
         cur = database.cursor()
         query = "SELECT * FROM shifts"

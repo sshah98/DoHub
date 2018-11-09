@@ -43,15 +43,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
             </div>
         </div>
 
-        {% for event in events %}
+        {% for shift in shifts %}
 
         <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-            <span class="w3-right w3-opacity"> {{event[5]}}</span>
-            <h2>{{ event[1] }}</h2><br>
+            <span class="w3-right w3-opacity"> {{shift[2]}}</span>
+            <h2> Start time: {{ shift[3] }} | End time: {{ shift[4] }} </h2><br>
             <hr class="w3-clear">
-            <p>Event date: {{ event[2] }} </p>
-            <p>Start time: {{ event[3] }} | End time: {{ event[4] }}</p>
-            <p>Event details: {{event[6]}} </p>
+            <p>Spots open: {{ shift[5] }} </p>
+            <p>Spots filled: {{shift[6]}} </p>
             <form action="/event_register">
                 <span class="w3-right w3-opacity"> <button type="submit"> Register </button> </span>
             </form>
