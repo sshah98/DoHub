@@ -199,15 +199,29 @@ def create_event():
 def calendar():
     return render_template('json.html')
 
-@app.route('/event_register')
+@app.route('/event_register', methods=['GET','POST'])
 def event_register():
 
-    cur = database.cursor()
-    query = "SELECT * FROM events"
-    cur.execute(query)
-    events = list(cur.fetchall())
+    ## select where event id after post
+    if request.method == 'GET':
+        cur = database.cursor()
+        query = "SELECT * FROM shifts"
+        cur.execute(query)
+        shifts = list(cur.fetchall())
 
-    return render_template('event_register.html', events=events)
+        query = "SELECT title FROM events"
+        cur.execute(query)
+        title = list(cur.fetchall())
+
+        return render_template('event_register.html', shifts=shifts,title=title)
+
+    elif request.method == 'POST':
+        cur = database.cursor()
+        query = "SELECT * FROM events"
+        cur.execute(query)
+        events = list(cur.fetchall())
+
+        return render_template('event_register.html', events=events)
 
 # ======== Logout =========================================================== #
 @app.route('/logout/')
