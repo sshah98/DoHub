@@ -6,9 +6,9 @@ from flask import Flask, redirect, url_for, render_template, request, session, f
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc, select
 
-HEROKU_DB = "postgres://utjukngdvaagnt:9e3ad063a636e4cc1ed33e0cdca2ba858daf3040ee4df5e4ed21132f4c2c82f9@ec2-50-17-194-186.compute-1.amazonaws.com:5432/d47t7c5tma2rd5"
+HEROKU_DB = "postgres://xahgibsehoicni:e0f94f56a46bf28779238194da1c99729423acff651883fd1653e81af8bc1bea@ec2-204-236-230-19.compute-1.amazonaws.com:5432/dbfnt3bft2okb4"
 
-LOCAL_DB = "postgres:///scorpio"
+LOCAL_DB = "postgres:///dohub"
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -123,9 +123,9 @@ def register():
 
             new_user = User(
                 name=request.form['name'], email=request.form['email'], password=hashed_pass,
-                interests=interests)#, birthday=request.form['dob'], nationalid=request.form['nationalid'],
-                # address=request.form['address'], phone=request.form['phone'], facebook=request.form['fbname'],
-                # work_school=request.form['work_school']) #, language=request.form[''], lang_prof=request.form[''])
+                interests=interests, birthday=request.form['dob'], nationalid=request.form['nationalid'],
+                address=request.form['address'], phone=request.form['phone'], facebook=request.form['fbname'],
+                work_school=request.form['work_school'], english=request.form['english'], russian=request.form['russian'], korean=request.form['korean'])
 
             db.session.add(new_user)
             db.session.commit()

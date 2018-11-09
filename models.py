@@ -15,8 +15,9 @@ class User(db.Model):
     phone = db.Column(db.String())
     facebook = db.Column(db.String())
     work_school = db.Column(db.Text)
-    language = db.Column(db.String())
-    lang_prof = db.Column(db.String())
+    english = db.Column(db.String())
+    russian = db.Column(db.String())
+    korean = db.Column(db.String())
     emergency_contact = db.Column(db.Text)
     comments = db.Column(db.Text)
 
@@ -35,8 +36,20 @@ class Event(db.Model):
     content = db.Column(db.Text)
     interests = db.Column(db.Text)
     
+    
     def __repr__(self):
         return 'id {}'.format(self.id)
+
+class Shifts(db.Model):
+    __tablename__ = 'shifts'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    eventid = db.Column(db.Integer, db.ForeignKey('events.id'))
+    email = db.Column(db.String(), db.ForeignKey('users.email'))
+    shift_start = db.Column(db.DateTime)
+    shift_end = db.Column(db.DateTime)
+    spots_open = db.Column(db.Integer)
+    spots_filled = db.Column(db.Integer)        
         
 class Amber(db.Model):
     __tablename__ = 'amber'
