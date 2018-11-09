@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>Event Creation</title>
 	<meta charset="UTF-8">
@@ -18,10 +19,11 @@
 	<link rel="stylesheet" type="text/css" href="../static/assets2/css/main.css">
 	<link rel="stylesheet" type="text/css" href="../static/assets2/css/time.css">
 </head>
+
 <body>
-	
+
 	<form action="/create" method="POST">
-		
+
 		<div class="container-contact100">
 			<div class="wrap-contact100">
 				<form class="contact100-form validate-form">
@@ -37,41 +39,35 @@
 						<span class="label-input100">TITLE *</span>
 						<input class="input100" type="text" name="title" placeholder="Post Title..." required>
 					</div>
-					
+
 					<div class="wrap-input100 bg1">
 						<span class="label-input100">INTERESTS *</span>
 						<input class="input100" type="text" name="interests" placeholder="Interest Tags..." required>
 					</div>
-					
-					<fieldset>
-						<legend>Choose date</legend>
-						
-						<div>
-							<label for="start">Start</label>
-							<input type="date" id="date" name="date" value="" required/>
-						</div>
-					</fieldset>
-					
-					<fieldset>
-						
-						<legend>Time details</legend>
-						
-						<div class="control">
-							<label2 for="time">Start Time:</label2>
-							<input type="time" id="starttime" name="starttime" required />
-						</div>
-						<div class="control">
-							<label2 for="time">End Time:</label2>
-							<input type="time" id="endtime" name="endtime" required />
-						</div>
-					</fieldset>
-					
-					
+
+					<div class="wrap-input100 bg1">
+						<span class="label-input100">DATE *</span>
+						<input class="input100" type="date" id="date" name="date" value="" required>
+
+					</div>
+
+					<div class="wrap-input100 bg1">
+						<span class="label-input100">START TIME *</span>
+						<input class="input100" type="time" id="starttime" name="starttime" value="" required>
+
+					</div>
+
+					<div class="wrap-input100 bg1">
+						<span class="label-input100">END TIME *</span>
+						<input class="input100" type="time" id="endtime" name="endtime" value="" required>
+
+					</div>
+
 					<div class="wrap-input100 bg0">
 						<span class="label-input100">CONTENT *</span>
-						<textarea class="input100" name="content" placeholder="Event details..." required></textarea>
+						<textarea class="input100" type="text" name="content" id="content" placeholder="Event details..." required></textarea>
 					</div>
-					
+
 					<div class="container-contact100-form-btn">
 						<button class="contact100-form-btn">
 							<span>
@@ -83,82 +79,29 @@
 				</form>
 			</div>
 		</div>
-		
+
 	</form>
-	
-	
-	<!--===============================================================================================-->
+
 	<script src="../static/assets2/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="../static/assets2/vendor/animsition/js/animsition.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="../static/assets2/vendor/bootstrap/js/popper.js"></script>
 	<script src="../static/assets2/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
 	<script src="../static/assets2/vendor/select2/select2.min.js"></script>
-	<script>
-	$(".js-select2").each(function(){
-		$(this).select2({
-			minimumResultsForSearch: 20,
-			dropdownParent: $(this).next('.dropDownSelect2')
-		});
-		
-		
-		$(".js-select2").each(function(){
-			$(this).on('select2:close', function (e){
-				if($(this).val() == "Please chooses") {
-					$('.js-show-service').slideUp();
-				}
-				else {
-					$('.js-show-service').slideUp();
-					$('.js-show-service').slideDown();
-				}
-			});
-		});
-	})
-	</script>
-	<!--===============================================================================================-->
-	<script src="../static/assets2/vendor/daterangepicker/moment.min.js"></script>
-	<script src="../static/assets2/vendor/daterangepicker/daterangepicker.js"></script>
-	<!--===============================================================================================-->
-	<script src="../static/assets2/vendor/countdowntime/countdowntime.js"></script>
-	<!--===============================================================================================-->
-	<script src="../static/assets2/vendor/noui/nouislider.min.js"></script>
-	<script>
-	var filterBar = document.getElementById('filter-bar');
-	
-	noUiSlider.create(filterBar, {
-		start: [ 1500, 3900 ],
-		connect: true,
-		range: {
-			'min': 1500,
-			'max': 7500
-		}
-	});
-	
-	var skipValues = [
-		document.getElementById('value-lower'),
-		document.getElementById('value-upper')
-	];
-	
-	filterBar.noUiSlider.on('update', function( values, handle ) {
-		skipValues[handle].innerHTML = Math.round(values[handle]);
-		$('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
-		$('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
-	});
-	</script>
-	<!--===============================================================================================-->
 	<script src="../static/assets2/js/main.js"></script>
-	
+
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	
-	gtag('config', 'UA-23581568-13');
-</script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-23581568-13');
+	</script>
 
 </body>
+
 </html>

@@ -7,8 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exc, select
 
 HEROKU_DB = "postgres://xahgibsehoicni:e0f94f56a46bf28779238194da1c99729423acff651883fd1653e81af8bc1bea@ec2-204-236-230-19.compute-1.amazonaws.com:5432/dbfnt3bft2okb4"
-
-LOCAL_DB = "postgres:///dohub"
+# LOCAL_DB = "postgres:///dohub"
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -151,21 +150,27 @@ def create_event():
             return render_template('create_event.html', email=session['email'])
 
         elif request.method == 'POST':
+            
             title = request.form['title']
             date = request.form['date']
             starttime = request.form['starttime']
             endtime = request.form['endtime']
             content = request.form['content']
             interests = request.form['interests']
-            # cur = database.cursor()
 
             result = Event(title=title, date=date, starttime=starttime, endtime=endtime, email=session['email'], content=content, interests=interests)
             db.session.add(result)
             db.session.commit()
 
-            print(session['email'])
-
             return redirect(url_for('home'))
+
+@app.route('/create_shifts')
+def create_shifts():
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        if request.method == 'GET':
+            return render_template('shifts.html')
 
 @app.route('/calendar')
 def calendar():
